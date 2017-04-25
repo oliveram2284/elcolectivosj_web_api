@@ -1,3 +1,4 @@
+
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
@@ -41,16 +42,18 @@ class Companies extends CI_Controller {
   public function add(){
     $data=array();
 
-
-
     $this->form_validation->set_rules('name', 'Name', 'required|min_length[5]|max_length[12]');
     $this->form_validation->set_rules('overview', 'Overview', 'required');
     $this->form_validation->set_rules('email', 'Email', 'valid_email');
 
     if ($this->form_validation->run() === true){
+
+			$data=$this->input->post();
       $result=$this->do_upload();
-      $data=$this->input->post();
-      $data['image']=$result['upload_data']['file_name'];
+
+			if($result!=null){
+				$data['image']=$result['upload_data']['file_name'];
+			}
 
       if(  $this->companies_model->insert($data)){
         $this->session->set_flashdata('message', "Se agrego una nueva Empresa exitosamente");
@@ -67,9 +70,36 @@ class Companies extends CI_Controller {
 
   }
 
+	public function edit($company_id){
 
-  function do_upload()
-{
+		$company=$this->companies_model->getById($company_id);
+		$this->form_validation->set_rules('name', 'Name', 'required|min_length[5]');
+    $this->form_validation->set_rules('overview', 'Overview', 'required');
+    $this->form_validation->set_rules('email', 'Email', 'valid_email');
+
+		if (isset($_POST) && !empty($_POST)){
+			$data=$this->input->post();
+			$image=$this->do_upload();
+			if($image!=null){
+				$data['image']=$image['upload_data']['file_name'];
+			}else{
+				$data['image']='assets/images/icon_192x192.png';
+			}
+
+			if ($this->form_validation->run() === true){
+				if($this->companies_model->update($company_id,$data)){
+					redirect('/companies');
+				}
+			}
+		}
+		$data['company']=$company;
+		$this->load->view('layout/header');
+    $this->load->view('companies/edit', $data);
+    $this->load->view('layout/footer');
+	}
+
+
+  function do_upload(){
 
     $config['upload_path'] = './uploads/';
     $config['max_width']  = '1024';

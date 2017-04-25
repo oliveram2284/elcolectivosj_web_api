@@ -7,8 +7,15 @@ class Companies_model extends CI_Model {
   }
 
 
-  public function  insert($data=array()){    
+  public function  insert($data=array()){
+
+    $this->db->set('created_at', 'NOW()', FALSE);    
     $result=$this->db->insert('companies',$data);
+    return $result;
+  }
+
+  public function  update($id=0,$data){
+    $result=$this->db->update('companies', $data, array('id' => $id));
     return $result;
   }
 

@@ -79,15 +79,15 @@
                             </ul>
                         </li>
                         <li class="dropdown hidden">
-                            <a href="#" data-toggle="dropdown" class="dropdown-toggle"><img src="assets/images/us.png" alt=""> English</a>
+                            <a href="#" data-toggle="dropdown" class="dropdown-toggle"><img src="<?php echo base_url();?>assets/images/us.png" alt=""> English</a>
                             <ul class="dropdown-menu dropdown-menu-scale lang-dropdown">
-                                <li><a href="#"><img src="assets/images/us.png" alt=""> English </a></li>
-                                <li><a href="#"><img src="assets/images/es.png" alt=""> Spanish </a></li>
-                                <li><a href="#"><img src="assets/images/tr.png" alt=""> Turkish </a></li>
+                                <li><a href="#"><img src="<?php echo base_url();?>assets/images/us.png" alt=""> English </a></li>
+                                <li><a href="#"><img src="<?php echo base_url();?>assets/images/es.png" alt=""> Spanish </a></li>
+                                <li><a href="#"><img src="<?php echo base_url();?>assets/images/tr.png" alt=""> Turkish </a></li>
                             </ul>
                         </li>
                         <li class="dropdown">
-                            <a href="#" data-toggle="dropdown" class="dropdown-toggle"><img src="assets/images/avtar.png" alt="" width="30" class="img-circle"> Administrador</a>
+                            <a href="#" data-toggle="dropdown" class="dropdown-toggle"><img src="<?php echo base_url()."assets/images/icon_72x72.png"?>" alt="" width="30" class="img-circle"> Administrador</a>
                             <ul class="dropdown-menu dropdown-menu-scale user-dropdown">
                                 <li><a href="#"><i class="ion-email-unread"></i> Inbox <span class="label label-warning">3</span></a></li>
                                 <li><a href="#"><i class="ion-person"></i> Profile </a></li>
@@ -128,16 +128,10 @@
                             </a>
                             <ul class="hoe-sub-menu">
                                 <li>
-                                    <a href="companies">
-                                        <span class="menu-text">Empresas</span>
-                                        <span class="selected"></span>
-                                    </a>
+                                  <?php echo anchor('companies','<span class="menu-text">Empresas</span><span class="selected"></span>');?>
                                 </li>
                                 <li>
-                                    <a href="email-compose.html">
-                                        <span class="menu-text">Lineas</span>
-                                        <span class="selected"></span>
-                                    </a>
+                                  <?php echo anchor('lines','<span class="menu-text">Lineas</span><span class="selected"></span>');?>
                                 </li>
                                 <li>
                                     <a href="email-view.html">
